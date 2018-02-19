@@ -26,13 +26,13 @@
     <header class="header">
       <div class="header__bar row">
         <h1 class="grid-6"><a href="/">PicTweet</a></h1>
-          <% if true %>
+          <% if user_signed_in? %>
             <div class="user_nav grid-6">
               <span><%= current_user.nickname %>
                 <ul class="user__info">
                   <li>
                     <a href="/users/<%= current_user.id %>">マイページ</a>
-                    <%= link_to "ログアウト", destroy_user_session_path %>
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
                   </li>
                 </ul>
               </span>

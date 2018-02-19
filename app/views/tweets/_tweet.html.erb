@@ -5,7 +5,7 @@
       <li>
         <%= link_to "詳細", tweet_path(tweet.id), method: :get %>
       </li>
-      <% if true %>
+      <% if user_signed_in? && current_user.id == tweet.user_id %>
         <li>
           <%= link_to '編集', "/tweets/#{tweet.id}/edit", method: :get %>
         </li>

@@ -3,7 +3,7 @@ class TweetsController < ApplicationController
   before_action :move_to_index, except: [:index]
 
   def index
-    @tweets = Tweet.includes(:user).page(params[:page]).per(5)
+    @tweets = Tweet.includes(:user).page(params[:page]).per(5).order('created_at DESC')
   end
 
   def show
@@ -38,10 +38,11 @@ class TweetsController < ApplicationController
 
   private
   def tweet_params
-    {user_id: current_user.id}
+    params.permit(:text, :image).merge(user_id: current_user.id)
   end
 
   def move_to_index
+    redirect_to root_path unless user_signed_in?
   end
 
 end
